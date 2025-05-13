@@ -1,0 +1,136 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|c:\\users\\stepa\\source\\repos\\oop cursovaya\\oop cursovaya\\clientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\clientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|c:\\users\\stepa\\source\\repos\\oop cursovaya\\oop cursovaya\\clientform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\clientform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\oop cursovaya\\clientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\clientform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|c:\\users\\stepa\\source\\repos\\oop cursovaya\\oop cursovaya\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|c:\\users\\stepa\\source\\repos\\oop cursovaya\\oop cursovaya\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|c:\\users\\stepa\\source\\repos\\oop cursovaya\\oop cursovaya\\welcomeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\welcomeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|c:\\users\\stepa\\source\\repos\\oop cursovaya\\oop cursovaya\\furniture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894E35FC-2F07-4E0A-BA77-F11BA965D65F}|OOP Cursovaya\\OOP Cursovaya Stepanov.csproj|solutionrelative:oop cursovaya\\furniture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WelcomeForm.cs",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\WelcomeForm.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\WelcomeForm.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\WelcomeForm.cs",
+              "RelativeToolTip": "OOP Cursovaya\\WelcomeForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T18:30:09.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClientForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\ClientForm.Designer.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\ClientForm.Designer.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\ClientForm.Designer.cs",
+              "RelativeToolTip": "OOP Cursovaya\\ClientForm.Designer.cs",
+              "ViewState": "AgIAAFoBAAAAAAAAAAAYwC4BAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T11:46:56.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClientForm.cs",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\ClientForm.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\ClientForm.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\ClientForm.cs",
+              "RelativeToolTip": "OOP Cursovaya\\ClientForm.cs",
+              "ViewState": "AgIAALoDAAAAAAAAAAAiwNcDAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:46:40.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DatabaseContext.cs",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\DatabaseContext.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\DatabaseContext.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\DatabaseContext.cs",
+              "RelativeToolTip": "OOP Cursovaya\\DatabaseContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:35:34.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\Program.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\Program.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\Program.cs",
+              "RelativeToolTip": "OOP Cursovaya\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:35:33.199Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Furniture.cs",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\Furniture.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\Furniture.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\Furniture.cs",
+              "RelativeToolTip": "OOP Cursovaya\\Furniture.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:35:25.093Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClientForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\ClientForm.cs",
+              "RelativeDocumentMoniker": "OOP Cursovaya\\ClientForm.cs",
+              "ToolTip": "C:\\Users\\stepa\\source\\repos\\OOP Cursovaya\\OOP Cursovaya\\ClientForm.cs [Design]",
+              "RelativeToolTip": "OOP Cursovaya\\ClientForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T16:42:41.702Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

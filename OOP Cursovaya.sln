@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP Cursovaya Stepanov", "OOP Cursovaya\OOP Cursovaya Stepanov.csproj", "{894E35FC-2F07-4E0A-BA77-F11BA965D65F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "StepanovCursovayaOOPSetup", "StepanovCursovayaOOPSetup\StepanovCursovayaOOPSetup.vdproj", "{B86A435C-6A30-3003-218E-98C4E306918E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{894E35FC-2F07-4E0A-BA77-F11BA965D65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{894E35FC-2F07-4E0A-BA77-F11BA965D65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{894E35FC-2F07-4E0A-BA77-F11BA965D65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{894E35FC-2F07-4E0A-BA77-F11BA965D65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B86A435C-6A30-3003-218E-98C4E306918E}.Debug|Any CPU.ActiveCfg = Debug
+		{B86A435C-6A30-3003-218E-98C4E306918E}.Debug|Any CPU.Build.0 = Debug
+		{B86A435C-6A30-3003-218E-98C4E306918E}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F58333AA-C90D-46F2-85D8-EBD017F1E3A4}
+	EndGlobalSection
+EndGlobal
