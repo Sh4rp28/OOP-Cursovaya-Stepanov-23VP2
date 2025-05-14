@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OOP Cursovaya Stepanov")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d7aa3003b4d4dc5eeff0050dbe5d3c0d21457c7")]
 [assembly: System.Reflection.AssemblyProductAttribute("OOP Cursovaya Stepanov")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OOP Cursovaya Stepanov")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

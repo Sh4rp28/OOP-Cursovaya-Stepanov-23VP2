@@ -6,7 +6,7 @@ namespace OOP_Cursovaya
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Точка входа в программу
         /// </summary>
         [STAThread]
         static void Main()

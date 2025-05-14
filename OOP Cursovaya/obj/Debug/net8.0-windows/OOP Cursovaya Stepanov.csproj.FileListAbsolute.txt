@@ -22,27 +22,6 @@ C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\OOP Cursovaya Stepanov.runtimeconfig.json
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\OOP Cursovaya Stepanov.dll
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\OOP Cursovaya Stepanov.pdb
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.barcodes.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.bouncy-castle-connector.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.forms.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.io.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.kernel.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.layout.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.pdfa.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.pdfua.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.sign.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.styledxmlparser.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.svg.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\itext.commons.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.DotNet.PlatformAbstractions.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyModel.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
-C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\QuestPDF.dll
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\System.Data.SQLite.dll
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\runtimes\linux-arm64\native\libQuestPdfSkia.so
@@ -90,3 +69,4 @@ C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\Debug\net8.0-windows
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\Debug\net8.0-windows\OOP Cursovaya Stepanov.genruntimeconfig.cache
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\Debug\net8.0-windows\ref\OOP Cursovaya Stepanov.dll
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\Debug\net8.0-windows\table_icon-icons.com_69867.ico
+C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\Debug\net8.0-windows\OOP Cursovaya Stepanov.sourcelink.json
