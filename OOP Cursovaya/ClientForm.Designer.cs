@@ -4,7 +4,6 @@
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.TextBox txtCategory;
         private System.Windows.Forms.TextBox txtWeight;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Button btnAdd;
@@ -206,7 +205,7 @@
             comboBoxFilter.Enabled = false;
             comboBoxFilter.FormattingEnabled = true;
             comboBoxFilter.Items.AddRange(new object[] { "ID", "Категория", "Вес", "Цена" });
-            comboBoxFilter.Location = new Point(13, 464);
+            comboBoxFilter.Location = new Point(12, 499);
             comboBoxFilter.Name = "comboBoxFilter";
             comboBoxFilter.Size = new Size(150, 28);
             comboBoxFilter.TabIndex = 10;
@@ -214,7 +213,7 @@
             // txtFilterValue
             // 
             txtFilterValue.Enabled = false;
-            txtFilterValue.Location = new Point(169, 465);
+            txtFilterValue.Location = new Point(168, 500);
             txtFilterValue.Name = "txtFilterValue";
             txtFilterValue.Size = new Size(150, 27);
             txtFilterValue.TabIndex = 11;
@@ -222,7 +221,7 @@
             // btnFilter
             // 
             btnFilter.Enabled = false;
-            btnFilter.Location = new Point(325, 464);
+            btnFilter.Location = new Point(324, 499);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(108, 37);
             btnFilter.TabIndex = 12;
@@ -232,7 +231,7 @@
             // btnClearFilter
             // 
             btnClearFilter.Enabled = false;
-            btnClearFilter.Location = new Point(197, 507);
+            btnClearFilter.Location = new Point(196, 542);
             btnClearFilter.Name = "btnClearFilter";
             btnClearFilter.Size = new Size(108, 31);
             btnClearFilter.TabIndex = 13;
@@ -299,7 +298,7 @@
             // labelFilterByValue
             // 
             labelFilterByValue.AutoSize = true;
-            labelFilterByValue.Location = new Point(13, 429);
+            labelFilterByValue.Location = new Point(12, 464);
             labelFilterByValue.Name = "labelFilterByValue";
             labelFilterByValue.Size = new Size(190, 20);
             labelFilterByValue.TabIndex = 17;
@@ -308,7 +307,7 @@
             // lblFilteredCount
             // 
             lblFilteredCount.AutoSize = true;
-            lblFilteredCount.Location = new Point(13, 510);
+            lblFilteredCount.Location = new Point(12, 545);
             lblFilteredCount.Name = "lblFilteredCount";
             lblFilteredCount.Size = new Size(141, 20);
             lblFilteredCount.TabIndex = 18;
@@ -317,7 +316,7 @@
             // buttonSearch
             // 
             buttonSearch.Enabled = false;
-            buttonSearch.Location = new Point(325, 507);
+            buttonSearch.Location = new Point(324, 542);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(108, 31);
             buttonSearch.TabIndex = 19;
@@ -328,7 +327,7 @@
             // 
             checkBoxExactMatch.AutoSize = true;
             checkBoxExactMatch.Enabled = false;
-            checkBoxExactMatch.Location = new Point(439, 468);
+            checkBoxExactMatch.Location = new Point(438, 503);
             checkBoxExactMatch.Name = "checkBoxExactMatch";
             checkBoxExactMatch.Size = new Size(169, 24);
             checkBoxExactMatch.TabIndex = 20;

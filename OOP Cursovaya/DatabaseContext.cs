@@ -13,7 +13,6 @@ namespace OOP_Cursovaya
         private readonly string _connectionString;
         private List<Furniture> _furnitureCache;
         private bool _isCacheDirty = true;
-        private readonly object _cacheLock = new object();
 
         /// <summary>
         /// Инициализирует новый экземпляр класса DatabaseContext
@@ -22,6 +21,7 @@ namespace OOP_Cursovaya
         public DatabaseContext(string connectionString)
         {
             _connectionString = connectionString;
+            _furnitureCache = new List<Furniture>(); // Явная инициализация
             InitializeDatabase();
         }
 
@@ -74,10 +74,7 @@ namespace OOP_Cursovaya
         public List<Furniture> GetAllFurniture()
         {
             RefreshCacheIfNeeded();
-            lock (_cacheLock)
-            {
-                return _furnitureCache.ToList(); // Возвращаем копию
-            }
+            return _furnitureCache.ToList(); // Возвращаем копию
         }
 
         /// <summary>
@@ -87,25 +84,22 @@ namespace OOP_Cursovaya
         /// <remarks>Обновляет кэш после добавления</remarks>
         public void AddFurniture(Furniture furniture)
         {
-            lock (_cacheLock)
+            using (var connection = new SQLiteConnection(_connectionString))
+            using (var command = new SQLiteCommand(
+                "INSERT INTO Furniture (Category, Weight, Price) VALUES (@Category, @Weight, @Price); " +
+                "SELECT last_insert_rowid();", connection))
             {
-                using (var connection = new SQLiteConnection(_connectionString))
-                using (var command = new SQLiteCommand(
-                    "INSERT INTO Furniture (Category, Weight, Price) VALUES (@Category, @Weight, @Price); " +
-                    "SELECT last_insert_rowid();", connection))
-                {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@Category", furniture.Category);
-                    command.Parameters.AddWithValue("@Weight", furniture.Weight);
-                    command.Parameters.AddWithValue("@Price", furniture.Price);
+                connection.Open();
+                command.Parameters.AddWithValue("@Category", furniture.Category);
+                command.Parameters.AddWithValue("@Weight", furniture.Weight);
+                command.Parameters.AddWithValue("@Price", furniture.Price);
 
-                    var newId = Convert.ToInt32(command.ExecuteScalar());
-                    furniture.Id = newId;
+                var newId = Convert.ToInt32(command.ExecuteScalar());
+                furniture.Id = newId;
 
-                    // Добавляем в кэш
-                    RefreshCacheIfNeeded();
-                    _furnitureCache.Add(furniture);
-                }
+                // Добавляем в кэш
+                RefreshCacheIfNeeded();
+                _furnitureCache.Add(furniture);
             }
         }
 
@@ -116,29 +110,26 @@ namespace OOP_Cursovaya
         /// <remarks>Обновляет соответствующую запись в кэше</remarks>
         public void UpdateFurniture(Furniture furniture)
         {
-            lock (_cacheLock)
+            using (var connection = new SQLiteConnection(_connectionString))
+            using (var command = new SQLiteCommand(
+                "UPDATE Furniture SET Category = @Category, Weight = @Weight, Price = @Price WHERE Id = @Id",
+                connection))
             {
-                using (var connection = new SQLiteConnection(_connectionString))
-                using (var command = new SQLiteCommand(
-                    "UPDATE Furniture SET Category = @Category, Weight = @Weight, Price = @Price WHERE Id = @Id",
-                    connection))
-                {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@Category", furniture.Category);
-                    command.Parameters.AddWithValue("@Weight", furniture.Weight);
-                    command.Parameters.AddWithValue("@Price", furniture.Price);
-                    command.Parameters.AddWithValue("@Id", furniture.Id);
-                    command.ExecuteNonQuery();
+                connection.Open();
+                command.Parameters.AddWithValue("@Category", furniture.Category);
+                command.Parameters.AddWithValue("@Weight", furniture.Weight);
+                command.Parameters.AddWithValue("@Price", furniture.Price);
+                command.Parameters.AddWithValue("@Id", furniture.Id);
+                command.ExecuteNonQuery();
 
-                    // Обновляем кэш
-                    RefreshCacheIfNeeded();
-                    var item = _furnitureCache.FirstOrDefault(f => f.Id == furniture.Id);
-                    if (item != null)
-                    {
-                        item.Category = furniture.Category;
-                        item.Weight = furniture.Weight;
-                        item.Price = furniture.Price;
-                    }
+                // Обновляем кэш
+                RefreshCacheIfNeeded();
+                var item = _furnitureCache.FirstOrDefault(f => f.Id == furniture.Id);
+                if (item != null)
+                {
+                    item.Category = furniture.Category;
+                    item.Weight = furniture.Weight;
+                    item.Price = furniture.Price;
                 }
             }
         }
@@ -150,21 +141,18 @@ namespace OOP_Cursovaya
         /// <remarks>Удаляет соответствующую запись из кэша</remarks>
         public void DeleteFurniture(int id)
         {
-            lock (_cacheLock)
+            using (var connection = new SQLiteConnection(_connectionString))
+            using (var command = new SQLiteCommand(
+                "DELETE FROM Furniture WHERE Id = @Id",
+                connection))
             {
-                using (var connection = new SQLiteConnection(_connectionString))
-                using (var command = new SQLiteCommand(
-                    "DELETE FROM Furniture WHERE Id = @Id",
-                    connection))
-                {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@Id", id);
-                    command.ExecuteNonQuery();
+                connection.Open();
+                command.Parameters.AddWithValue("@Id", id);
+                command.ExecuteNonQuery();
 
-                    // Удаляем из кэша
-                    RefreshCacheIfNeeded();
-                    _furnitureCache.RemoveAll(f => f.Id == id);
-                }
+                // Удаляем из кэша
+                RefreshCacheIfNeeded();
+                _furnitureCache.RemoveAll(f => f.Id == id);
             }
         }
 
@@ -177,12 +165,9 @@ namespace OOP_Cursovaya
         public List<Furniture> SearchFurnitureByCategory(string category)
         {
             RefreshCacheIfNeeded();
-            lock (_cacheLock)
-            {
-                return _furnitureCache
-                    .Where(f => f.Category.Contains(category, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-            }
+            return _furnitureCache
+                .Where(f => f.Category.Contains(category, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
 
         /// <summary>
@@ -207,31 +192,26 @@ namespace OOP_Cursovaya
         {
             if (!_isCacheDirty) return;
 
-            lock (_cacheLock)
+            _furnitureCache = new List<Furniture>();
+            using (var connection = new SQLiteConnection(_connectionString))
+            using (var command = new SQLiteCommand("SELECT * FROM Furniture", connection))
             {
-                if (!_isCacheDirty) return;
-
-                _furnitureCache = new List<Furniture>();
-                using (var connection = new SQLiteConnection(_connectionString))
-                using (var command = new SQLiteCommand("SELECT * FROM Furniture", connection))
+                connection.Open();
+                using (var reader = command.ExecuteReader())
                 {
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        _furnitureCache.Add(new Furniture
                         {
-                            _furnitureCache.Add(new Furniture
-                            {
-                                Id = reader.GetInt32(0),
-                                Category = reader.GetString(1),
-                                Weight = reader.GetDouble(2),
-                                Price = reader.GetDouble(3)
-                            });
-                        }
+                            Id = reader.GetInt32(0),
+                            Category = reader.GetString(1),
+                            Weight = reader.GetDouble(2),
+                            Price = reader.GetDouble(3)
+                        });
                     }
                 }
-                _isCacheDirty = false;
             }
+            _isCacheDirty = false;
         }
     }
 }

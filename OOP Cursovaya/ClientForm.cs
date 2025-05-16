@@ -1,4 +1,5 @@
 using System;
+#nullable disable
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -11,6 +12,8 @@ using QuestPDF.Infrastructure;
 using System.Globalization;
 using System.ComponentModel;
 using System.Linq;
+using System.Diagnostics.CodeAnalysis;
+
 
 namespace OOP_Cursovaya
 {
@@ -169,19 +172,18 @@ namespace OOP_Cursovaya
             }
         }
 
-        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        private void dataGridView_SelectionChanged([NotNull] object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 0)
                 return;
 
             var row = dataGridView.SelectedRows[0];
 
-            // Подставляем значения из строки в поля
-            if (row.Cells["Category"].Value != null)
-                comboBoxCategory.SelectedItem = row.Cells["Category"].Value.ToString();
+            if (row.Cells["Category"]?.Value is { } categoryValue)
+                comboBoxCategory.SelectedItem = categoryValue.ToString();
 
-            txtWeight.Text = row.Cells["Weight"].Value?.ToString();
-            txtPrice.Text = row.Cells["Price"].Value?.ToString();
+            txtWeight.Text = row.Cells["Weight"]?.Value?.ToString();
+            txtPrice.Text = row.Cells["Price"]?.Value?.ToString();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -337,7 +339,6 @@ namespace OOP_Cursovaya
                 }
 
                 // Обновляем счетчик и отображаем отфильтрованные данные
-                _filteredItemsCount = filteredList.Count;
                 dataGridView.Rows.Clear();
 
                 foreach (var furniture in filteredList)
@@ -350,6 +351,7 @@ namespace OOP_Cursovaya
                     );
                 }
 
+                _filteredItemsCount = filteredList.Count;
                 UpdateFilterCount(true, _filteredItemsCount);
             }
             catch (Exception ex)
@@ -673,7 +675,6 @@ namespace OOP_Cursovaya
                 {
                     string pdfFilePath = saveFileDialog.FileName;
 
-                    // Проверяем корректность пути
                     if (string.IsNullOrEmpty(pdfFilePath) || Path.GetInvalidPathChars().Any(pdfFilePath.Contains))
                     {
                         MessageBox.Show("Недопустимый путь к файлу.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -682,24 +683,20 @@ namespace OOP_Cursovaya
 
                     try
                     {
-                        // Удаляем существующий файл, если есть
                         if (File.Exists(pdfFilePath))
                         {
                             File.Delete(pdfFilePath);
                         }
 
-                        // Устанавливаем лицензию для QuestPDF
                         QuestPDF.Settings.License = LicenseType.Community;
 
-                        // Получаем имя базы данных для заголовка
                         string dbName = "Неизвестная база данных";
                         if (_dbContext != null && !string.IsNullOrEmpty(_dbContext.ConnectionString))
                         {
                             var builder = new SQLiteConnectionStringBuilder(_dbContext.ConnectionString);
-                            dbName = Path.GetFileNameWithoutExtension(builder.DataSource);
+                            dbName = Path.GetFileNameWithoutExtension(builder.DataSource) ?? dbName;
                         }
 
-                        // Создаем PDF документ
                         Document.Create(container =>
                         {
                             container.Page(page =>
@@ -711,13 +708,16 @@ namespace OOP_Cursovaya
 
                                 page.Content().Column(column =>
                                 {
-                                    // Заголовок с именем базы данных
-                                    column.Item().PaddingBottom(10).AlignCenter().Text($"Таблица из базы данных: {dbName}").FontSize(20).Bold();
+                                    // Новый синтаксис для заголовка
+                                    column.Item().PaddingBottom(10).AlignCenter().Text(text =>
+                                    {
+                                        text.Span($"Таблица из базы данных: {dbName}")
+                                           .FontSize(20)
+                                           .Bold();
+                                    });
 
-                                    // Таблица с данными
                                     column.Item().Border(1).Table(table =>
                                     {
-                                        // Определение колонок
                                         table.ColumnsDefinition(columns =>
                                         {
                                             foreach (DataGridViewColumn column in dataGridView.Columns)
@@ -726,25 +726,27 @@ namespace OOP_Cursovaya
                                             }
                                         });
 
-                                        // Стили для заголовков и ячеек
                                         var headerStyle = TextStyle.Default.Bold();
                                         var cellStyle = TextStyle.Default;
 
-                                        // Заголовки таблицы
                                         table.Header(header =>
                                         {
                                             foreach (DataGridViewColumn column in dataGridView.Columns)
                                             {
+                                                // Новый синтаксис для заголовков столбцов
                                                 header.Cell()
                                                     .Border(1)
                                                     .Background(Colors.Grey.Lighten3)
                                                     .Padding(5)
                                                     .AlignCenter()
-                                                    .Text(column.HeaderText, headerStyle);
+                                                    .Text(text =>
+                                                    {
+                                                        text.Span(column.HeaderText)
+                                                           .Style(headerStyle);
+                                                    });
                                             }
                                         });
 
-                                        // Данные таблицы
                                         foreach (DataGridViewRow row in dataGridView.Rows)
                                         {
                                             if (row.IsNewRow) continue;
@@ -752,11 +754,16 @@ namespace OOP_Cursovaya
                                             foreach (DataGridViewCell cell in row.Cells)
                                             {
                                                 string cellValue = cell.Value?.ToString() ?? "";
+                                                // Новый синтаксис для ячеек таблицы
                                                 table.Cell()
                                                     .Border(1)
                                                     .Padding(5)
                                                     .AlignCenter()
-                                                    .Text(cellValue, cellStyle);
+                                                    .Text(text =>
+                                                    {
+                                                        text.Span(cellValue)
+                                                           .Style(cellStyle);
+                                                    });
                                             }
                                         }
                                     });
@@ -791,14 +798,15 @@ namespace OOP_Cursovaya
                 var connectionStringBuilder = new SQLiteConnectionStringBuilder(_dbContext.ConnectionString);
                 string databasePath = connectionStringBuilder.DataSource;
 
-                if (!File.Exists(databasePath))
+                if (string.IsNullOrEmpty(databasePath) || !File.Exists(databasePath))
                 {
                     MessageBox.Show("Файл базы данных не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Запрашиваем подтверждение удаления
-                if (MessageBox.Show("Вы уверены, что хотите удалить текущую базу данных?", "Подтверждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Вы уверены, что хотите удалить текущую базу данных?",
+                    "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
@@ -813,9 +821,10 @@ namespace OOP_Cursovaya
                         System.Threading.Thread.Sleep(500);
 
                         // Проверяем блокировку файла
-                        if (IsFileLocked(databasePath, out string lockingProcessName))
+                        if (IsFileLocked(databasePath, out string lockingProcessName) && !string.IsNullOrEmpty(lockingProcessName))
                         {
-                            MessageBox.Show($"Файл базы данных используется процессом: {lockingProcessName}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show($"Файл базы данных используется процессом: {lockingProcessName}.",
+                                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
@@ -833,19 +842,27 @@ namespace OOP_Cursovaya
                         openDatabaseToolStripMenuItem.Enabled = true;
                         createDatabaseToolStripMenuItem.Enabled = true;
                         UpdateDatabaseNameDisplay();
-                        MessageBox.Show("База данных перемещена в корзину.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        MessageBox.Show("База данных перемещена в корзину.",
+                            "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (IOException ex)
                     {
-                        MessageBox.Show($"Не удалось удалить файл базы данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        _dbContext = new DatabaseContext($"Data Source={databasePath};Version=3;");
-                        LoadData();
+                        MessageBox.Show($"Не удалось удалить файл базы данных: {ex.Message}",
+                            "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        if (!string.IsNullOrEmpty(databasePath))
+                        {
+                            _dbContext = new DatabaseContext($"Data Source={databasePath};Version=3;");
+                            LoadData();
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при удалении базы данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка при удалении базы данных: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -855,13 +872,14 @@ namespace OOP_Cursovaya
         /// <param name="filePath">Путь к проверяемому файлу</param>
         /// <param name="lockingProcessName">Имя процесса, блокирующего файл (если есть)</param>
         /// <returns>True, если файл заблокирован, иначе False</returns>
-        private bool IsFileLocked(string filePath, out string lockingProcessName)
+        private bool IsFileLocked(string filePath, out string lockingProcessName) 
         {
             lockingProcessName = null;
 
+            if (string.IsNullOrEmpty(filePath)) return false;
+
             try
             {
-                // Пытаемся открыть файл с эксклюзивным доступом
                 using (FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
                 {
                     stream.Close();
@@ -869,7 +887,6 @@ namespace OOP_Cursovaya
             }
             catch (IOException)
             {
-                // Если файл заблокирован, пытаемся определить процесс
                 Process[] processes = Process.GetProcesses();
                 foreach (Process process in processes)
                 {
@@ -879,7 +896,7 @@ namespace OOP_Cursovaya
                         {
                             foreach (ProcessModule module in process.Modules)
                             {
-                                if (module.FileName.Equals(filePath, StringComparison.OrdinalIgnoreCase))
+                                if (module.FileName?.Equals(filePath, StringComparison.OrdinalIgnoreCase) == true)
                                 {
                                     lockingProcessName = process.ProcessName;
                                     return true;
@@ -889,14 +906,12 @@ namespace OOP_Cursovaya
                     }
                     catch
                     {
-                        continue; // Пропускаем процессы без доступа
+                        continue;
                     }
                 }
-
-                return true; // Файл заблокирован, но процесс не определен
+                return true;
             }
-
-            return false; // Файл не заблокирован
+            return false;
         }
 
         /// <summary>

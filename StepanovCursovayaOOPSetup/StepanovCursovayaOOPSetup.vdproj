@@ -45,6 +45,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_68F539E7B29E49AB90A739FFD786F82F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6F00FB111D024A4EA58F84B54365EC7D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_939E89B898424AC3A404E3E3F4A4AE86"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -69,12 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BEDD48DB573448269D79025E2C4703ED"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C0272DAB5C5E4F36930A1DE02F7AB589"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -88,12 +94,6 @@
         "Entry"
         {
         "MsmKey" = "8:_C7506FF58ECD44E6A039083E6E355CD7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C9BEA540E4424F37AFB31F6C39A9699E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -144,8 +144,23 @@
                 {
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 и x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.8.0.x64"
+                    {
+                    "Name" = "8:Среда выполнения .NET 8.0.13 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.8.0.x64"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.8.0.x86"
+                    {
+                    "Name" = "8:Среда выполнения .NET 8.0.13 (x86)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.8.0.x86"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.8.0.x64"
+                    {
+                    "Name" = "8:Среда выполнения .NET для классических приложений 8.0.13 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.8.0.x64"
                     }
                 }
             }
@@ -323,6 +338,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_68F539E7B29E49AB90A739FFD786F82F"
+            {
+            "SourcePath" = "8:..\\OOP Cursovaya\\ico.ico"
+            "TargetName" = "8:ico.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_26D52BEAF6574FDCAA6936CC9BB8EE6F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6F00FB111D024A4EA58F84B54365EC7D"
+            {
+            "SourcePath" = "8:..\\OOP Cursovaya\\bin\\Debug\\net8.0-windows\\OOP Cursovaya Stepanov.exe"
+            "TargetName" = "8:OOP Cursovaya Stepanov.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_1E5076FEB527442F8FDAD77F1550742B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_939E89B898424AC3A404E3E3F4A4AE86"
             {
             "SourcePath" = "8:..\\OOP Cursovaya\\bin\\Debug\\net8.0-windows\\runtimes\\win-x64\\native\\libgcc_s_seh-1.dll"
@@ -403,26 +458,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BEDD48DB573448269D79025E2C4703ED"
-            {
-            "SourcePath" = "8:..\\OOP Cursovaya\\bin\\Debug\\net8.0-windows\\OOP Cursovaya Stepanov.exe"
-            "TargetName" = "8:OOP Cursovaya Stepanov.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_1E5076FEB527442F8FDAD77F1550742B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C0272DAB5C5E4F36930A1DE02F7AB589"
             {
             "AssemblyRegister" = "3:1"
@@ -460,26 +495,6 @@
             "TargetName" = "8:libwinpthread-1.dll"
             "Tag" = "8:"
             "Folder" = "8:_BEB7FF5D9A6D47FB8612E958587C2AF0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9BEA540E4424F37AFB31F6C39A9699E"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\Downloads\\table_icon-icons.com_69867.ico"
-            "TargetName" = "8:table_icon-icons.com_69867.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_6E3487DDB81A4A1580C2A8137ABF3A80"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -562,7 +577,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_1E5076FEB527442F8FDAD77F1550742B"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -570,6 +585,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_26D52BEAF6574FDCAA6936CC9BB8EE6F"
+                    {
+                    "Name" = "8:Images"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_4DF84E68469B4CB39E4D94B41D568338"
+                        "Folders"
+                        {
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_6A9F1406164D44C0A3F85A6108A83381"
                     {
                     "Name" = "8:runtimes"
@@ -666,7 +692,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:StepanovCursovayaOOPSetup"
         "ProductCode" = "8:{EB6E6977-E0D7-4A44-A590-2523D04E2E7D}"
-        "PackageCode" = "8:{940287A9-D68E-47B1-BF51-78D0A805CE38}"
+        "PackageCode" = "8:{846635CE-1DD2-4B67-8A95-196C9E1060DB}"
         "UpgradeCode" = "8:{7C6AB21E-6A5E-40EC-BB83-CEA59816918B}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -683,11 +709,11 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_C9BEA540E4424F37AFB31F6C39A9699E"
+        "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -786,6 +812,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9BED9DCA21BE44BABD55990E4F9DB2D6"
+            {
+            "Name" = "8:OOP Cursovaya Stepanov"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_6F00FB111D024A4EA58F84B54365EC7D"
+            "Folder" = "8:_CC6A5F92FBF146909E526B26912797F5"
+            "WorkingFolder" = "8:_1E5076FEB527442F8FDAD77F1550742B"
+            "Icon" = "8:_68F539E7B29E49AB90A739FFD786F82F"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C4193CB89FF04D6CB981E61BF48CD36E"
+            {
+            "Name" = "8:OOP Cursovaya Stepanov"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_6F00FB111D024A4EA58F84B54365EC7D"
+            "Folder" = "8:_6E3487DDB81A4A1580C2A8137ABF3A80"
+            "WorkingFolder" = "8:_1E5076FEB527442F8FDAD77F1550742B"
+            "Icon" = "8:_68F539E7B29E49AB90A739FFD786F82F"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -1187,7 +1241,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C7506FF58ECD44E6A039083E6E355CD7"
             {
-            "SourcePath" = "8:..\\OOP Cursovaya\\obj\\Debug\\net8.0-windows\\OOP Cursovaya Stepanov.dll"
+            "SourcePath" = "8:..\\OOP Cursovaya\\obj\\x64\\Debug\\net8.0-windows\\OOP Cursovaya Stepanov.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1E5076FEB527442F8FDAD77F1550742B"
