@@ -172,6 +172,14 @@ namespace OOP_Cursovaya
             }
         }
 
+        /// <summary>
+        /// Обрабатывает изменение выбранной строки в DataGridView, обновляя соответствующие элементы управления.
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Данные события</param>
+        /// <remarks>
+        /// Заполняет комбо-бокс категории и текстовые поля данными из выбранной строки.
+        /// </remarks>
         private void dataGridView_SelectionChanged([NotNull] object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 0)
@@ -186,6 +194,15 @@ namespace OOP_Cursovaya
             txtPrice.Text = row.Cells["Price"]?.Value?.ToString();
         }
 
+        /// <summary>
+        /// Обрабатывает нажатие кнопки редактирования, обновляя выбранную запись в базе данных.
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Данные события</param>
+        /// <remarks>
+        /// Проверяет корректность введенных данных перед обновлением записи.
+        /// В случае ошибки отображает соответствующее сообщение.
+        /// </remarks>
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 0)
@@ -219,7 +236,7 @@ namespace OOP_Cursovaya
                 };
 
                 _dbContext.UpdateFurniture(furniture);
-                LoadData(); // Перезагрузка данных
+                LoadData();
             }
             catch (Exception ex)
             {
@@ -422,7 +439,19 @@ namespace OOP_Cursovaya
                     if (checkBoxExactMatch.Checked)
                     {
                         // Точное совпадение
-                        isMatch = string.Equals(cellValue, filterValue, StringComparison.OrdinalIgnoreCase);
+
+                        if ((filterColumnText == "Вес" || filterColumnText == "Цена") &&
+                            double.TryParse(cellValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double cellDouble) &&
+                            double.TryParse(filterValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double searchDouble))
+                        {
+                            // Сравниваем числа с учетом точности
+                            isMatch = Math.Abs(cellDouble - searchDouble) < 0.0001;
+                        }
+                        else
+                        {
+                            // Для остальных типов (например, ID или Category) обычное строковое сравнение
+                            isMatch = string.Equals(cellValue, filterValue, StringComparison.OrdinalIgnoreCase);
+                        }
                     }
                     else
                     {
@@ -915,8 +944,11 @@ namespace OOP_Cursovaya
         }
 
         /// <summary>
-        /// Сортирует данные в DataGridView по указанному столбцу
+        /// Сортирует данные в DataGridView по указанному столбцу с учетом текущего направления сортировки.
         /// </summary>
+        /// <param name="columnHeaderText">Название столбца, по которому выполняется сортировка (должно соответствовать именам столбцов DataGridView).</param>
+        /// <exception cref="ArgumentException">Выбрасывается, если переданное имя столбца не соответствует ожидаемым значениям.</exception>
+
         private void SortData(string columnHeaderText)
         {
             if (_dbContext == null) return;
@@ -977,8 +1009,8 @@ namespace OOP_Cursovaya
                     dataGridView.Rows.Add(
                         furniture.Id,
                         furniture.Category,
-                        furniture.Weight.ToString("F2", CultureInfo.InvariantCulture), // Форматируем как строку
-                        furniture.Price.ToString("F2", CultureInfo.InvariantCulture)   // Форматируем как строку
+                        furniture.Weight.ToString("F2", CultureInfo.InvariantCulture),
+                        furniture.Price.ToString("F2", CultureInfo.InvariantCulture)
                     );
                 }
 
@@ -991,6 +1023,14 @@ namespace OOP_Cursovaya
             }
         }
 
+        /// <summary>
+        /// Обрабатывает клик по заголовку столбца DataGridView и сортирует данные по выбранному столбцу.
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие (DataGridView).</param>
+        /// <param name="e">Аргументы события, содержащие информацию о клике (кнопка мыши, индекс столбца).</param>
+        /// <remarks>
+        /// Сортировка выполняется только при клике левой кнопкой мыши.
+        /// </remarks>
         private void dataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -1000,6 +1040,13 @@ namespace OOP_Cursovaya
             }
         }
 
+        /// <summary>
+        /// Обновляет отображение имени текущей базы данных в элементе управления Label.
+        /// </summary>
+        /// <remarks>
+        /// Если подключение к БД отсутствует или не установлено, отображается "Текущая БД: не открыта".
+        /// Для SQLite имя БД извлекается из пути в ConnectionString.
+        /// </remarks>
         private void UpdateDatabaseNameDisplay()
         {
             if (_dbContext == null || string.IsNullOrEmpty(_dbContext.ConnectionString))

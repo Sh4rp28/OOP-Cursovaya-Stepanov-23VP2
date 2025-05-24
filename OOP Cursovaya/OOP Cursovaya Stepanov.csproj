@@ -10,6 +10,7 @@
 		<PlatformTarget>x64</PlatformTarget>
 		<ApplicationIcon>ico.ico</ApplicationIcon>
 		<Platforms>AnyCPU;x64</Platforms>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

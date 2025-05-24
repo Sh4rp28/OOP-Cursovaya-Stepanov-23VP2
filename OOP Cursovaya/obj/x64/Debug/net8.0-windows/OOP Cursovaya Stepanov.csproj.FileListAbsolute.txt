@@ -70,3 +70,5 @@ C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\x64\Debug\net8.0-win
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\x64\Debug\net8.0-windows\OOP Cursovaya Stepanov.pdb
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\x64\Debug\net8.0-windows\OOP Cursovaya Stepanov.genruntimeconfig.cache
 C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\x64\Debug\net8.0-windows\ref\OOP Cursovaya Stepanov.dll
+C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\bin\x64\Debug\net8.0-windows\OOP Cursovaya Stepanov.xml
+C:\Users\stepa\source\repos\OOP Cursovaya\OOP Cursovaya\obj\x64\Debug\net8.0-windows\OOP Cursovaya Stepanov.xml

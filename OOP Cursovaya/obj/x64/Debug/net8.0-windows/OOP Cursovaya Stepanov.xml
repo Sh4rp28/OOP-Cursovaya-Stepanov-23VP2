@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OOP Cursovaya Stepanov</name>
+    </assembly>
+    <members>
+        <member name="T:OOP_Cursovaya.ClientForm">
+            <summary>
+            Главная форма приложения для работы с базой данных мебели
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.#ctor">
+            <summary>
+            Конструктор формы, инициализирует компоненты и меню
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.InitializeMenu">
+            <summary>
+            Инициализация состояния пунктов меню
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.ClientForm_Load(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик загрузки формы
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.UpdateFilterCount(System.Boolean,System.Int32)">
+            <summary>
+            Обновляет счетчик отфильтрованных элементов
+            </summary>
+            <param name="isFiltered">Флаг, указывающий применен ли фильтр</param>
+            <param name="count">Количество элементов</param>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.LoadData">
+            <summary>
+            Загружает данные из базы данных в DataGridView
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.txtWeight_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Обработчик ввода для поля веса, разрешает только цифры и точку
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.btnAdd_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик кнопки добавления новой записи
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.dataGridView_SelectionChanged(System.Object,System.EventArgs)">
+            <summary>
+            Обрабатывает изменение выбранной строки в DataGridView, обновляя соответствующие элементы управления.
+            </summary>
+            <param name="sender">Источник события</param>
+            <param name="e">Данные события</param>
+            <remarks>
+            Заполняет комбо-бокс категории и текстовые поля данными из выбранной строки.
+            </remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.btnEdit_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обрабатывает нажатие кнопки редактирования, обновляя выбранную запись в базе данных.
+            </summary>
+            <param name="sender">Источник события</param>
+            <param name="e">Данные события</param>
+            <remarks>
+            Проверяет корректность введенных данных перед обновлением записи.
+            В случае ошибки отображает соответствующее сообщение.
+            </remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.btnDelete_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик кнопки удаления записи
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.btnFilter_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик кнопки фильтрации данных
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.ButtonSearch_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик кнопки поиска данных
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.UpdateSortGlyph">
+            <summary>
+            Обновляет индикаторы сортировки в заголовках столбцов
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.btnClearFilter_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик кнопки сброса фильтров
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.OpenDatabaseToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик пункта меню "Открыть базу данных"
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.CreateDatabaseToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик пункта меню "Создать базу данных"
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.SaveAsDatabaseToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик пункта меню "Сохранить базу данных как..."
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.SaveTableAsPDFToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик пункта меню "Сохранить таблицу как PDF"
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.DeleteDatabaseToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик пункта меню "Удалить базу данных"
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.IsFileLocked(System.String,System.String@)">
+            <summary>
+            Проверяет, заблокирован ли файл другим процессом
+            </summary>
+            <param name="filePath">Путь к проверяемому файлу</param>
+            <param name="lockingProcessName">Имя процесса, блокирующего файл (если есть)</param>
+            <returns>True, если файл заблокирован, иначе False</returns>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.SortData(System.String)">
+            <summary>
+            Сортирует данные в DataGridView по указанному столбцу с учетом текущего направления сортировки.
+            </summary>
+            <param name="columnHeaderText">Название столбца, по которому выполняется сортировка (должно соответствовать именам столбцов DataGridView).</param>
+            <exception cref="T:System.ArgumentException">Выбрасывается, если переданное имя столбца не соответствует ожидаемым значениям.</exception>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.dataGridView_ColumnHeaderMouseClick(System.Object,System.Windows.Forms.DataGridViewCellMouseEventArgs)">
+            <summary>
+            Обрабатывает клик по заголовку столбца DataGridView и сортирует данные по выбранному столбцу.
+            </summary>
+            <param name="sender">Объект, вызвавший событие (DataGridView).</param>
+            <param name="e">Аргументы события, содержащие информацию о клике (кнопка мыши, индекс столбца).</param>
+            <remarks>
+            Сортировка выполняется только при клике левой кнопкой мыши.
+            </remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.ClientForm.UpdateDatabaseNameDisplay">
+            <summary>
+            Обновляет отображение имени текущей базы данных в элементе управления Label.
+            </summary>
+            <remarks>
+            Если подключение к БД отсутствует или не установлено, отображается "Текущая БД: не открыта".
+            Для SQLite имя БД извлекается из пути в ConnectionString.
+            </remarks>
+        </member>
+        <member name="T:OOP_Cursovaya.DatabaseContext">
+            <summary>
+            Репозиторий для работы с базой данных мебели, реализующий кэширование данных в памяти
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.#ctor(System.String)">
+            <summary>
+            Инициализирует новый экземпляр класса DatabaseContext
+            </summary>
+            <param name="connectionString">Строка подключения к базе данных SQLite</param>
+        </member>
+        <member name="P:OOP_Cursovaya.DatabaseContext.ConnectionString">
+            <summary>
+            Строка подключения к базе данных
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.InitializeDatabase">
+            <summary>
+            Инициализирует базу данных, создавая таблицу Furniture, если она не существует
+            </summary>
+            <exception cref="T:System.Exception">Выбрасывается при ошибках инициализации базы данных</exception>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.GetAllFurniture">
+            <summary>
+            Получает все записи о мебели из базы данных
+            </summary>
+            <returns>Список всех объектов мебели</returns>
+            <remarks>Использует кэширование для повышения производительности</remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.AddFurniture(OOP_Cursovaya.Furniture)">
+            <summary>
+            Добавляет новую запись о мебели в базу данных
+            </summary>
+            <param name="furniture">Объект мебели для добавления</param>
+            <remarks>Обновляет кэш после добавления</remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.UpdateFurniture(OOP_Cursovaya.Furniture)">
+            <summary>
+            Обновляет существующую запись о мебели в базе данных
+            </summary>
+            <param name="furniture">Объект мебели с обновленными данными</param>
+            <remarks>Обновляет соответствующую запись в кэше</remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.DeleteFurniture(System.Int32)">
+            <summary>
+            Удаляет запись о мебели из базы данных по идентификатору
+            </summary>
+            <param name="id">Идентификатор удаляемой записи</param>
+            <remarks>Удаляет соответствующую запись из кэша</remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.SearchFurnitureByCategory(System.String)">
+            <summary>
+            Выполняет поиск мебели по категории
+            </summary>
+            <param name="category">Категория для поиска (регистронезависимо)</param>
+            <returns>Список найденных объектов мебели</returns>
+            <remarks>Поиск выполняется по кэшированным данным</remarks>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.Dispose">
+            <summary>
+            Освобождает ресурсы, используемые репозиторием
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.DatabaseContext.RefreshCacheIfNeeded">
+            <summary>
+            Обновляет кэш данных при необходимости
+            </summary>
+        </member>
+        <member name="T:OOP_Cursovaya.Furniture">
+            <summary>
+            Класс, представляющий модель мебели в системе.
+            </summary>
+        </member>
+        <member name="P:OOP_Cursovaya.Furniture.Id">
+            <summary>
+            Уникальный идентификатор записи о мебели.
+            </summary>
+        </member>
+        <member name="P:OOP_Cursovaya.Furniture.Category">
+            <summary>
+            Категория мебели (например: "Диван", "Шкаф", "Стол").
+            </summary>
+        </member>
+        <member name="P:OOP_Cursovaya.Furniture.Weight">
+            <summary>
+            Вес мебели в килограммах.
+            </summary>
+        </member>
+        <member name="P:OOP_Cursovaya.Furniture.Price">
+            <summary>
+            Цена мебели в рублях.
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.Program.Main">
+            <summary>
+            Точка входа в программу
+            </summary>
+        </member>
+        <member name="F:OOP_Cursovaya.WelcomeForm.components">
+            <summary>
+            Обязательная переменная конструктора.
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.WelcomeForm.Dispose(System.Boolean)">
+            <summary>
+            Освободить все используемые ресурсы.
+            </summary>
+            <param name="disposing">true, если управляемые ресурсы должны быть освобождены; иначе false.</param>
+        </member>
+        <member name="M:OOP_Cursovaya.WelcomeForm.InitializeComponent">
+            <summary>
+            Метод, необходимый для поддержки конструктора.
+            Не изменяйте содержимое этого метода при помощи редактора кода.
+            </summary>
+        </member>
+    </members>
+</doc>
