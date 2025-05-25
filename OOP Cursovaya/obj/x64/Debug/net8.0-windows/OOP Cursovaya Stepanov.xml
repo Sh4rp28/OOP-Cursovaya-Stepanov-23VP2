@@ -151,6 +151,15 @@
             Для SQLite имя БД извлекается из пути в ConnectionString.
             </remarks>
         </member>
+        <member name="M:OOP_Cursovaya.ClientForm.Dispose(System.Boolean)">
+            <summary>
+            Освобождает неуправляемые ресурсы, используемые формой, а при необходимости — также управляемые ресурсы.
+            </summary>
+            <param name="disposing">
+            Значение <see langword="true"/> указывает, что следует освободить как управляемые, так и неуправляемые ресурсы;
+            Значение <see langword="false"/> означает, что нужно освободить только неуправляемые ресурсы.
+            </param>
+        </member>
         <member name="T:OOP_Cursovaya.DatabaseContext">
             <summary>
             Репозиторий для работы с базой данных мебели, реализующий кэширование данных в памяти
@@ -247,6 +256,23 @@
         <member name="M:OOP_Cursovaya.Program.Main">
             <summary>
             Точка входа в программу
+            </summary>
+        </member>
+        <member name="T:OOP_Cursovaya.WelcomeForm">
+            <summary>
+            Форма приветствия, которая появляется при запуске приложения.
+            Предоставляет информацию о программе и автоматически закрывается через 10 секунд.
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.WelcomeForm.#ctor">
+            <summary>
+            Инициализирует новый экземпляр формы приветствия.
+            </summary>
+        </member>
+        <member name="M:OOP_Cursovaya.WelcomeForm.InitializeWelcomeForm">
+            <summary>
+            Настраивает внешний вид и поведение формы приветствия.
+            Добавляет метку с описанием, кнопку "Далее" и таймер для автоматического закрытия.
             </summary>
         </member>
         <member name="F:OOP_Cursovaya.WelcomeForm.components">

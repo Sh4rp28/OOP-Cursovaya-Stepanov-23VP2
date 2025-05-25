@@ -19,7 +19,7 @@ namespace OOP_Cursovaya
         /// <summary>
         /// Категория мебели (например: "Диван", "Шкаф", "Стол").
         /// </summary>
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         /// <summary>
         /// Вес мебели в килограммах.

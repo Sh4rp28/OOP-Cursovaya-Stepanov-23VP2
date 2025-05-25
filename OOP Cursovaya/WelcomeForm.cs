@@ -3,14 +3,25 @@ using System.Windows.Forms;
 
 namespace OOP_Cursovaya
 {
+    /// <summary>
+    /// Форма приветствия, которая появляется при запуске приложения.
+    /// Предоставляет информацию о программе и автоматически закрывается через 10 секунд.
+    /// </summary>
     public partial class WelcomeForm : Form
     {
+        /// <summary>
+        /// Инициализирует новый экземпляр формы приветствия.
+        /// </summary>
         public WelcomeForm()
         {
             InitializeComponent();
             InitializeWelcomeForm();
         }
 
+        /// <summary>
+        /// Настраивает внешний вид и поведение формы приветствия.
+        /// Добавляет метку с описанием, кнопку "Далее" и таймер для автоматического закрытия.
+        /// </summary>
         private void InitializeWelcomeForm()
         {
             // Настройка формы
@@ -21,7 +32,7 @@ namespace OOP_Cursovaya
             this.Height = 200;
             this.Text = "Степанов Р.Д. 23ВП2, курсовой проект ООП";
 
-            // Создание элементов управления
+            // Создание метки с описанием
             var label = new Label
             {
                 Text = "Добро пожаловать. Это приложение для работы с базой данных 'Мебель'.\n\nЧтобы продолжить нажмите 'Далее' или подождите 10 секунд",
@@ -29,6 +40,7 @@ namespace OOP_Cursovaya
                 TextAlign = ContentAlignment.MiddleCenter
             };
 
+            // Создание кнопки "Далее"
             var button = new Button
             {
                 Text = "Далее",
@@ -36,6 +48,7 @@ namespace OOP_Cursovaya
                 DialogResult = DialogResult.OK
             };
 
+            // Панель для размещения кнопки внизу формы
             var panel = new Panel
             {
                 Dock = DockStyle.Bottom,
@@ -55,11 +68,11 @@ namespace OOP_Cursovaya
             {
                 timer.Stop();
                 this.DialogResult = DialogResult.OK;
-                this.Close(); // Закрываем форму по таймеру
+                this.Close();
             };
             timer.Start();
 
-            // Закрытие формы при нажатии на кнопку
+            // Обработчик нажатия на кнопку "Далее"
             button.Click += (sender, e) => this.Close();
         }
     }

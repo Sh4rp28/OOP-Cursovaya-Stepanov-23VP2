@@ -166,7 +166,7 @@ namespace OOP_Cursovaya
         {
             RefreshCacheIfNeeded();
             return _furnitureCache
-                .Where(f => f.Category.Contains(category, StringComparison.OrdinalIgnoreCase))
+                .Where(f => f.Category!.Contains(category, StringComparison.OrdinalIgnoreCase))
                 .ToList();
         }
 

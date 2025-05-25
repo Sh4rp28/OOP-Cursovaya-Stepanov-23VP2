@@ -23,6 +23,14 @@
         private System.Windows.Forms.ToolStripMenuItem createDatabaseToolStripMenuItem; 
         private System.Windows.Forms.ToolStripMenuItem deleteDatabaseToolStripMenuItem;
         private System.Windows.Forms.Label lblFilteredCount;
+
+        /// <summary>
+        /// Освобождает неуправляемые ресурсы, используемые формой, а при необходимости — также управляемые ресурсы.
+        /// </summary>
+        /// <param name="disposing">
+        /// Значение <see langword="true"/> указывает, что следует освободить как управляемые, так и неуправляемые ресурсы;
+        /// Значение <see langword="false"/> означает, что нужно освободить только неуправляемые ресурсы.
+        /// </param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -146,6 +154,7 @@
             comboBoxCategory.Enabled = false;
             comboBoxCategory.FormattingEnabled = true;
             comboBoxCategory.Items.AddRange(new object[] { "Стул", "Стол", "Шкаф", "Диван" });
+            comboBoxCategory.SelectedIndex = 0;
             comboBoxCategory.Location = new Point(13, 381);
             comboBoxCategory.Name = "comboBoxCategory";
             comboBoxCategory.Size = new Size(150, 28);

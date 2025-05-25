@@ -1,5 +1,4 @@
 using System;
-#nullable disable
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -22,9 +21,9 @@ namespace OOP_Cursovaya
     /// </summary>
     public partial class ClientForm : Form
     {
-        private DatabaseContext _dbContext;
+        private DatabaseContext? _dbContext;
         private ListSortDirection _currentSortDirection = ListSortDirection.Ascending;
-        private string _currentSortColumn = "";
+        private string _currentSortColumn = string.Empty;
         private int _totalItemsCount = 0;
         private int _filteredItemsCount = 0;
 
@@ -35,8 +34,7 @@ namespace OOP_Cursovaya
         {
             InitializeComponent();
             InitializeMenu();
-            dataGridView.SelectionChanged += dataGridView_SelectionChanged;
-
+            dataGridView.SelectionChanged += dataGridView_SelectionChanged!;
         }
 
         /// <summary>
@@ -123,14 +121,26 @@ namespace OOP_Cursovaya
         /// </summary>
         private void txtWeight_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Разрешаем цифры, точку и управляющие клавиши (например, Backspace)
+            // Проверяем, что sender действительно TextBox
+            if (sender is not TextBox textBox)
+                return;
+
+            // Разрешаем цифры, точку и управляющие клавиши
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
             {
-                e.Handled = true; // Игнорируем ввод
+                e.Handled = true;
+                return;
             }
 
             // Запрещаем ввод более одной точки
-            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            if (e.KeyChar == '.' && textBox.Text.Contains("."))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Запрещаем ввод точки в самом начале
+            if (e.KeyChar == '.' && textBox.SelectionStart == 0)
             {
                 e.Handled = true;
             }
@@ -153,13 +163,13 @@ namespace OOP_Cursovaya
                 // Создаем новый объект мебели
                 var furniture = new Furniture
                 {
-                    Category = comboBoxCategory.SelectedItem.ToString(),
+                    Category = comboBoxCategory.SelectedItem?.ToString() ?? string.Empty,
                     Weight = double.Parse(txtWeight.Text, CultureInfo.InvariantCulture),
                     Price = double.Parse(txtPrice.Text, CultureInfo.InvariantCulture)
                 };
 
                 // Добавляем запись в базу данных
-                _dbContext.AddFurniture(furniture);
+                _dbContext?.AddFurniture(furniture);
                 LoadData(); // Обновляем отображение данных
             }
             catch (FormatException)
@@ -180,7 +190,7 @@ namespace OOP_Cursovaya
         /// <remarks>
         /// Заполняет комбо-бокс категории и текстовые поля данными из выбранной строки.
         /// </remarks>
-        private void dataGridView_SelectionChanged([NotNull] object sender, EventArgs e)
+        private void dataGridView_SelectionChanged( object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 0)
                 return;
@@ -230,12 +240,12 @@ namespace OOP_Cursovaya
                 var furniture = new Furniture
                 {
                     Id = (int)selectedRow.Cells["Id"].Value,
-                    Category = comboBoxCategory.SelectedItem?.ToString(),
+                    Category = comboBoxCategory.SelectedItem?.ToString() ?? string.Empty,
                     Weight = weight,
                     Price = price
                 };
 
-                _dbContext.UpdateFurniture(furniture);
+                _dbContext?.UpdateFurniture(furniture);
                 LoadData();
             }
             catch (Exception ex)
@@ -264,7 +274,7 @@ namespace OOP_Cursovaya
                 int id = (int)selectedRow.Cells[0].Value; 
 
                 // Удаляем запись из базы данных
-                _dbContext.DeleteFurniture(id);
+                _dbContext?.DeleteFurniture(id);
                 LoadData(); // Обновляем отображение данных
             }
             else
@@ -279,11 +289,24 @@ namespace OOP_Cursovaya
         private void btnFilter_Click(object sender, EventArgs e)
         {
             string filterValue = txtFilterValue.Text;
-            string filterColumn = comboBoxFilter.SelectedItem.ToString();
+            string filterColumn = comboBoxFilter.SelectedItem?.ToString() ?? string.Empty;
+
+            // Инициализируем пустым списком по умолчанию
             var filteredList = new List<Furniture>();
 
             try
             {
+                // Проверяем, что контекст БД существует
+                if (_dbContext == null)
+                {
+                    MessageBox.Show("Ошибка: контекст базы данных не инициализирован", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Получаем все записи один раз
+                var allFurniture = _dbContext.GetAllFurniture() ?? Enumerable.Empty<Furniture>();
+
                 // Применяем фильтр в зависимости от выбранного столбца
                 switch (filterColumn)
                 {
@@ -292,14 +315,14 @@ namespace OOP_Cursovaya
                         {
                             if (int.TryParse(filterValue, out int id))
                             {
-                                filteredList = _dbContext.GetAllFurniture()
+                                filteredList = allFurniture
                                     .Where(f => f.Id == id)
                                     .ToList();
                             }
                         }
                         else
                         {
-                            filteredList = _dbContext.GetAllFurniture()
+                            filteredList = allFurniture
                                 .Where(f => f.Id.ToString().Contains(filterValue))
                                 .ToList();
                         }
@@ -308,13 +331,13 @@ namespace OOP_Cursovaya
                     case "Категория":
                         if (checkBoxExactMatch.Checked)
                         {
-                            filteredList = _dbContext.GetAllFurniture()
-                                .Where(f => f.Category.Equals(filterValue, StringComparison.OrdinalIgnoreCase))
+                            filteredList = allFurniture
+                                .Where(f => f.Category!.Equals(filterValue, StringComparison.OrdinalIgnoreCase))
                                 .ToList();
                         }
                         else
                         {
-                            filteredList = _dbContext.SearchFurnitureByCategory(filterValue);
+                            filteredList = _dbContext.SearchFurnitureByCategory(filterValue) ?? new List<Furniture>();
                         }
                         break;
 
@@ -323,14 +346,14 @@ namespace OOP_Cursovaya
                         {
                             if (double.TryParse(filterValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double weight))
                             {
-                                filteredList = _dbContext.GetAllFurniture()
+                                filteredList = allFurniture
                                     .Where(f => Math.Abs(f.Weight - weight) < 0.0001)
                                     .ToList();
                             }
                         }
                         else
                         {
-                            filteredList = _dbContext.GetAllFurniture()
+                            filteredList = allFurniture
                                 .Where(f => f.Weight.ToString(CultureInfo.InvariantCulture).Contains(filterValue))
                                 .ToList();
                         }
@@ -341,24 +364,24 @@ namespace OOP_Cursovaya
                         {
                             if (double.TryParse(filterValue, NumberStyles.Any, CultureInfo.InvariantCulture, out double price))
                             {
-                                filteredList = _dbContext.GetAllFurniture()
+                                filteredList = allFurniture
                                     .Where(f => Math.Abs(f.Price - price) < 0.0001)
                                     .ToList();
                             }
                         }
                         else
-                        {
-                            filteredList = _dbContext.GetAllFurniture()
+                        {   
+                            filteredList = allFurniture
                                 .Where(f => f.Price.ToString(CultureInfo.InvariantCulture).Contains(filterValue))
                                 .ToList();
                         }
                         break;
                 }
 
-                // Обновляем счетчик и отображаем отфильтрованные данные
+                // Обновляем DataGridView
                 dataGridView.Rows.Clear();
 
-                foreach (var furniture in filteredList)
+                foreach (var furniture in filteredList) // Теперь filteredList гарантированно не null
                 {
                     dataGridView.Rows.Add(
                         furniture.Id,
@@ -384,7 +407,7 @@ namespace OOP_Cursovaya
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
             // Получаем параметры поиска
-            string filterColumnText = comboBoxFilter.SelectedItem?.ToString();
+            string filterColumnText = comboBoxFilter.SelectedItem?.ToString() ?? string.Empty;
             string filterValue = txtFilterValue.Text.Trim();
 
             if (string.IsNullOrEmpty(filterColumnText) || string.IsNullOrEmpty(filterValue))
@@ -405,7 +428,7 @@ namespace OOP_Cursovaya
                 }
 
                 // Определяем имя столбца для поиска
-                string filterColumnName = null;
+                string filterColumnName = string.Empty;
 
                 switch (filterColumnText)
                 {
@@ -510,7 +533,7 @@ namespace OOP_Cursovaya
         private void btnClearFilter_Click(object sender, EventArgs e)
         {
             // Сбрасываем параметры сортировки
-            _currentSortColumn = "";
+            _currentSortColumn = string.Empty;
             _currentSortDirection = ListSortDirection.Ascending;
 
             // Загружаем исходные данные
@@ -560,7 +583,7 @@ namespace OOP_Cursovaya
                     {
                         // Логируем ошибку
                         string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "YourAppName", "error.log");
-                        Directory.CreateDirectory(Path.GetDirectoryName(logPath));
+                        Directory.CreateDirectory(Path.GetDirectoryName(logPath) ?? string.Empty);
                         File.AppendAllText(logPath, $"[{DateTime.Now}] Error: {ex}\n\n");
 
                         MessageBox.Show($"Ошибка: {ex.Message}\nПодробности в логе: {logPath}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -655,7 +678,7 @@ namespace OOP_Cursovaya
                         System.Threading.Thread.Sleep(500);
 
                         // Проверяем блокировку файла
-                        if (IsFileLocked(currentDatabasePath, out string lockingProcessName))
+                        if (IsFileLocked(currentDatabasePath, out string? lockingProcessName))
                         {
                             MessageBox.Show($"Файл базы данных используется процессом: {lockingProcessName}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
@@ -782,7 +805,7 @@ namespace OOP_Cursovaya
 
                                             foreach (DataGridViewCell cell in row.Cells)
                                             {
-                                                string cellValue = cell.Value?.ToString() ?? "";
+                                                string cellValue = cell.Value?.ToString() ?? string.Empty;
                                                 // Новый синтаксис для ячеек таблицы
                                                 table.Cell()
                                                     .Border(1)
@@ -850,7 +873,7 @@ namespace OOP_Cursovaya
                         System.Threading.Thread.Sleep(500);
 
                         // Проверяем блокировку файла
-                        if (IsFileLocked(databasePath, out string lockingProcessName) && !string.IsNullOrEmpty(lockingProcessName))
+                        if (IsFileLocked(databasePath, out string? lockingProcessName) && !string.IsNullOrEmpty(lockingProcessName))
                         {
                             MessageBox.Show($"Файл базы данных используется процессом: {lockingProcessName}.",
                                 "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -901,7 +924,7 @@ namespace OOP_Cursovaya
         /// <param name="filePath">Путь к проверяемому файлу</param>
         /// <param name="lockingProcessName">Имя процесса, блокирующего файл (если есть)</param>
         /// <returns>True, если файл заблокирован, иначе False</returns>
-        private bool IsFileLocked(string filePath, out string lockingProcessName) 
+        private bool IsFileLocked(string filePath, out string? lockingProcessName) 
         {
             lockingProcessName = null;
 
