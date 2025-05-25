@@ -66,7 +66,7 @@
             openDatabaseToolStripMenuItem = new ToolStripMenuItem();
             createDatabaseToolStripMenuItem = new ToolStripMenuItem();
             saveAsDatabaseToolStripMenuItem = new ToolStripMenuItem();
-            SaveTableAsPDFToolStripMenuItem = new ToolStripMenuItem();
+            saveTableAsPDFToolStripMenuItem = new ToolStripMenuItem();
             deleteDatabaseToolStripMenuItem = new ToolStripMenuItem();
             labelFilterByValue = new Label();
             lblFilteredCount = new Label();
@@ -263,7 +263,7 @@
             // fileToolStripMenuItem
             // 
             fileToolStripMenuItem.DropDownDirection = ToolStripDropDownDirection.BelowLeft;
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openDatabaseToolStripMenuItem, createDatabaseToolStripMenuItem, saveAsDatabaseToolStripMenuItem, SaveTableAsPDFToolStripMenuItem, deleteDatabaseToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openDatabaseToolStripMenuItem, createDatabaseToolStripMenuItem, saveAsDatabaseToolStripMenuItem, saveTableAsPDFToolStripMenuItem, deleteDatabaseToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(59, 24);
             fileToolStripMenuItem.Text = "Файл";
@@ -291,10 +291,10 @@
             // 
             // SaveTableAsPDFToolStripMenuItem
             // 
-            SaveTableAsPDFToolStripMenuItem.Name = "SaveTableAsPDFToolStripMenuItem";
-            SaveTableAsPDFToolStripMenuItem.Size = new Size(268, 26);
-            SaveTableAsPDFToolStripMenuItem.Text = "Сохранить таблицу в PDF";
-            SaveTableAsPDFToolStripMenuItem.Click += SaveTableAsPDFToolStripMenuItem_Click;
+            saveTableAsPDFToolStripMenuItem.Name = "SaveTableAsPDFToolStripMenuItem";
+            saveTableAsPDFToolStripMenuItem.Size = new Size(268, 26);
+            saveTableAsPDFToolStripMenuItem.Text = "Сохранить таблицу в PDF";
+            saveTableAsPDFToolStripMenuItem.Click += SaveTableAsPDFToolStripMenuItem_Click;
             // 
             // deleteDatabaseToolStripMenuItem
             // 
@@ -389,7 +389,7 @@
             PerformLayout();
         }
         private ToolStripMenuItem saveAsDatabaseToolStripMenuItem;
-        private ToolStripMenuItem SaveTableAsPDFToolStripMenuItem;
+        private ToolStripMenuItem saveTableAsPDFToolStripMenuItem;
         private Label labelFilterByValue;
         private Button buttonSearch;
         private CheckBox checkBoxExactMatch;

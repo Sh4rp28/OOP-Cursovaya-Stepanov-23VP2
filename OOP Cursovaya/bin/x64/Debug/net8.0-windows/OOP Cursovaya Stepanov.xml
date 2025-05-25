@@ -92,6 +92,12 @@
             Обработчик кнопки сброса фильтров
             </summary>
         </member>
+        <member name="M:OOP_Cursovaya.ClientForm.SetControlsEnabled(System.Boolean)">
+            <summary>
+            Включает или отключает элементы управления интерфейса, связанные с работой с данными.
+            </summary>
+            <param name="isEnabled">Если true - элементы включаются, если false - отключаются.</param>
+        </member>
         <member name="M:OOP_Cursovaya.ClientForm.OpenDatabaseToolStripMenuItem_Click(System.Object,System.EventArgs)">
             <summary>
             Обработчик пункта меню "Открыть базу данных"

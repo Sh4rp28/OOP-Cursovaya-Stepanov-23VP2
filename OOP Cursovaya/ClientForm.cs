@@ -26,6 +26,7 @@ namespace OOP_Cursovaya
         private string _currentSortColumn = string.Empty;
         private int _totalItemsCount = 0;
         private int _filteredItemsCount = 0;
+        private bool isEnabled = false;
 
         /// <summary>
         /// Конструктор формы, инициализирует компоненты и меню
@@ -43,6 +44,8 @@ namespace OOP_Cursovaya
         private void InitializeMenu()
         {
             deleteDatabaseToolStripMenuItem.Enabled = false; // Удаление недоступно
+            saveTableAsPDFToolStripMenuItem.Enabled = false; // Сохранение в ПДФ недоступно
+            saveAsDatabaseToolStripMenuItem.Enabled = false; // Сохранение как недоступно
             openDatabaseToolStripMenuItem.Enabled = true;    // Открытие доступно
             createDatabaseToolStripMenuItem.Enabled = true;  // Создание доступно
 
@@ -125,22 +128,12 @@ namespace OOP_Cursovaya
             if (sender is not TextBox textBox)
                 return;
 
-            // Разрешаем цифры, точку и управляющие клавиши
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Запрещаем ввод более одной точки
-            if (e.KeyChar == '.' && textBox.Text.Contains("."))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Запрещаем ввод точки в самом начале
-            if (e.KeyChar == '.' && textBox.SelectionStart == 0)
+            // Комбинированная проверка:
+            // 1. Если символ не цифра, не точка и не управляющий символ
+            // 2. ИЛИ если точка, но она уже есть в тексте
+            // 3. ИЛИ если точка вводится до ввода первой цифры
+            if ((!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar)) ||
+                (e.KeyChar == '.' && (textBox.Text.Contains(".") || textBox.SelectionStart == 0)))
             {
                 e.Handled = true;
             }
@@ -152,7 +145,7 @@ namespace OOP_Cursovaya
         private void btnAdd_Click(object sender, EventArgs e)
         {
             // Проверяем заполнение обязательных полей
-            if (string.IsNullOrEmpty(txtWeight.Text) || string.IsNullOrEmpty(txtPrice.Text))
+            if (comboBoxCategory.SelectedItem == null || string.IsNullOrEmpty(txtWeight.Text) || string.IsNullOrEmpty(txtPrice.Text))
             {
                 MessageBox.Show("Заполните все поля.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -197,9 +190,7 @@ namespace OOP_Cursovaya
 
             var row = dataGridView.SelectedRows[0];
 
-            if (row.Cells["Category"]?.Value is { } categoryValue)
-                comboBoxCategory.SelectedItem = categoryValue.ToString();
-
+            comboBoxCategory.SelectedItem = row.Cells["Category"]?.Value?.ToString();
             txtWeight.Text = row.Cells["Weight"]?.Value?.ToString();
             txtPrice.Text = row.Cells["Price"]?.Value?.ToString();
         }
@@ -223,26 +214,14 @@ namespace OOP_Cursovaya
 
             var selectedRow = dataGridView.SelectedRows[0];
 
-            if (!double.TryParse(txtWeight.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double weight))
-            {
-                MessageBox.Show("Некорректный формат веса.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!double.TryParse(txtPrice.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double price))
-            {
-                MessageBox.Show("Некорректный формат цены.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             try
             {
                 var furniture = new Furniture
                 {
                     Id = (int)selectedRow.Cells["Id"].Value,
                     Category = comboBoxCategory.SelectedItem?.ToString() ?? string.Empty,
-                    Weight = weight,
-                    Price = price
+                    Weight = double.Parse(txtWeight.Text, CultureInfo.InvariantCulture),
+                    Price = double.Parse(txtPrice.Text, CultureInfo.InvariantCulture)
                 };
 
                 _dbContext?.UpdateFurniture(furniture);
@@ -376,12 +355,19 @@ namespace OOP_Cursovaya
                                 .ToList();
                         }
                         break;
+                    default:
+                        MessageBox.Show(
+                            $"Неизвестный столбец для фильтрации: {filterColumn}",
+                            "Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
                 }
 
                 // Обновляем DataGridView
                 dataGridView.Rows.Clear();
 
-                foreach (var furniture in filteredList) // Теперь filteredList гарантированно не null
+                foreach (var furniture in filteredList)
                 {
                     dataGridView.Rows.Add(
                         furniture.Id,
@@ -542,6 +528,37 @@ namespace OOP_Cursovaya
         }
 
         /// <summary>
+        /// Включает или отключает элементы управления интерфейса, связанные с работой с данными.
+        /// </summary>
+        /// <param name="isEnabled">Если true - элементы включаются, если false - отключаются.</param>
+        private void SetControlsEnabled(bool isEnabled)
+        {
+            // Основные элементы управления
+            comboBoxCategory.Enabled = isEnabled;
+            txtWeight.Enabled = isEnabled;
+            txtPrice.Enabled = isEnabled;
+
+            // Кнопки CRUD операций
+            btnAdd.Enabled = isEnabled;
+            btnEdit.Enabled = isEnabled;
+            btnDelete.Enabled = isEnabled;
+
+            // Элементы фильтрации
+            comboBoxFilter.Enabled = isEnabled;
+            txtFilterValue.Enabled = isEnabled;
+            btnFilter.Enabled = isEnabled;
+            btnClearFilter.Enabled = isEnabled;
+            checkBoxExactMatch.Enabled = isEnabled;
+
+            // Поиск и управление БД
+            buttonSearch.Enabled = isEnabled;
+            deleteDatabaseToolStripMenuItem.Enabled = isEnabled;
+            saveAsDatabaseToolStripMenuItem.Enabled = isEnabled;
+            saveTableAsPDFToolStripMenuItem.Enabled = isEnabled;
+            saveAsDatabaseToolStripMenuItem.Enabled = isEnabled;
+        }
+
+        /// <summary>
         /// Обработчик пункта меню "Открыть базу данных"
         /// </summary>
         private void OpenDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -563,21 +580,9 @@ namespace OOP_Cursovaya
                         LoadData(); // Загружаем данные
 
                         UpdateDatabaseNameDisplay();
-
+                        isEnabled = true;
                         // Активируем элементы управления
-                        comboBoxCategory.Enabled = true;
-                        txtWeight.Enabled = true;
-                        txtPrice.Enabled = true;
-                        btnAdd.Enabled = true;
-                        btnEdit.Enabled = true;
-                        btnDelete.Enabled = true;
-                        comboBoxFilter.Enabled = true;
-                        txtFilterValue.Enabled = true;
-                        btnFilter.Enabled = true;
-                        btnClearFilter.Enabled = true;
-                        buttonSearch.Enabled = true;
-                        deleteDatabaseToolStripMenuItem.Enabled = true;
-                        checkBoxExactMatch.Enabled = true;
+                        SetControlsEnabled(isEnabled);
                     }
                     catch (Exception ex)
                     {
@@ -616,21 +621,9 @@ namespace OOP_Cursovaya
                         LoadData(); // Загружаем данные (пустую таблицу)
 
                         UpdateDatabaseNameDisplay();
-
+                        isEnabled = true;
                         // Активируем элементы управления
-                        comboBoxCategory.Enabled = true;
-                        txtWeight.Enabled = true;
-                        txtPrice.Enabled = true;
-                        btnAdd.Enabled = true;
-                        btnEdit.Enabled = true;
-                        btnDelete.Enabled = true;
-                        comboBoxFilter.Enabled = true;
-                        txtFilterValue.Enabled = true;
-                        btnFilter.Enabled = true;
-                        btnClearFilter.Enabled = true;
-                        buttonSearch.Enabled = true;
-                        deleteDatabaseToolStripMenuItem.Enabled = true;
-                        checkBoxExactMatch.Enabled = true;
+                        SetControlsEnabled(isEnabled);
                     }
                     catch (Exception ex)
                     {
@@ -712,12 +705,6 @@ namespace OOP_Cursovaya
         /// </summary>
         private void SaveTableAsPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridView.Rows.Count == 0)
-            {
-                MessageBox.Show("Таблица пуста. Нечего сохранять.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             using (var saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.Filter = "PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
@@ -749,6 +736,7 @@ namespace OOP_Cursovaya
                             dbName = Path.GetFileNameWithoutExtension(builder.DataSource) ?? dbName;
                         }
 
+                        // Структура документа
                         Document.Create(container =>
                         {
                             container.Page(page =>
@@ -760,7 +748,7 @@ namespace OOP_Cursovaya
 
                                 page.Content().Column(column =>
                                 {
-                                    // Новый синтаксис для заголовка
+                                    // Cинтаксис для заголовка
                                     column.Item().PaddingBottom(10).AlignCenter().Text(text =>
                                     {
                                         text.Span($"Таблица из базы данных: {dbName}")
@@ -785,7 +773,7 @@ namespace OOP_Cursovaya
                                         {
                                             foreach (DataGridViewColumn column in dataGridView.Columns)
                                             {
-                                                // Новый синтаксис для заголовков столбцов
+                                                // Cинтаксис для заголовков столбцов
                                                 header.Cell()
                                                     .Border(1)
                                                     .Background(Colors.Grey.Lighten3)
@@ -799,6 +787,7 @@ namespace OOP_Cursovaya
                                             }
                                         });
 
+                                        // Заполнение данными
                                         foreach (DataGridViewRow row in dataGridView.Rows)
                                         {
                                             if (row.IsNewRow) continue;
@@ -806,7 +795,6 @@ namespace OOP_Cursovaya
                                             foreach (DataGridViewCell cell in row.Cells)
                                             {
                                                 string cellValue = cell.Value?.ToString() ?? string.Empty;
-                                                // Новый синтаксис для ячеек таблицы
                                                 table.Cell()
                                                     .Border(1)
                                                     .Padding(5)
@@ -890,9 +878,9 @@ namespace OOP_Cursovaya
                         dataGridView.Rows.Clear();
 
                         // Обновляем состояние меню
-                        deleteDatabaseToolStripMenuItem.Enabled = false;
-                        openDatabaseToolStripMenuItem.Enabled = true;
-                        createDatabaseToolStripMenuItem.Enabled = true;
+                        isEnabled = false;
+                        SetControlsEnabled(isEnabled);
+
                         UpdateDatabaseNameDisplay();
 
                         MessageBox.Show("База данных перемещена в корзину.",
